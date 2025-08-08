@@ -37,6 +37,11 @@ Open: Open the file directly in any modern web browser to see it in action.
 Edit: Open the file in a code editor (like VS Code) to modify the content and styles.
 
 Output
+<img width="1920" height="879" alt="Image" src="https://github.com/user-attachments/assets/573ea6e9-9d84-402e-bd96-b9c23fc8ddbc" />
+
+<img width="1851" height="914" alt="Image" src="https://github.com/user-attachments/assets/22c7070c-93a8-4ad6-b114-6b3b5157aad9" />
+
+<img width="1865" height="890" alt="Image" src="https://github.com/user-attachments/assets/d06be262-a027-4560-a473-e0c8f76e204c" />
 Customization
 Customizing the look and feel of the website is simple.
 
