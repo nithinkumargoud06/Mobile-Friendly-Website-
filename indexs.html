@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Responsive Website</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        /* --- CSS Custom Properties (Variables) --- */
+        :root {
+            --primary-color: #007bff;
+            --secondary-color: #6c757d;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --body-bg: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-color: #333;
+            --border-radius: 8px;
+            --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Base & Typography --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            background-color: var(--body-bg);
+            color: var(--text-color);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 15px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        h1 { font-size: 2.8rem; }
+        h2 { font-size: 2rem; }
+        h3 { font-size: 1.5rem; }
+
+        p { margin-bottom: 1rem; }
+        a { color: var(--primary-color); text-decoration: none; }
+
+        /* --- Header & Navigation --- */
+        .main-header {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .main-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .main-nav li {
+            margin-left: 25px;
+        }
+
+        .main-nav a {
+            color: var(--dark-color);
+            font-weight: 500;
+            padding: 5px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .main-nav a:hover, .main-nav a.active {
+            color: var(--primary-color);
+        }
+        
+        .main-nav a:hover::after, .main-nav a.active::after {
+            width: 100%;
+        }
+
+        .btn {
+            background: var(--primary-color);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        
+        .btn:hover {
+            background: #0056b3;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+        
+        .btn:hover::after {
+            display: none;
+        }
+
+        /* Hamburger Menu for Mobile */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark-color);
+            border-radius: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        /* --- Showcase Section --- */
+        .showcase {
+            height: 85vh;
+            background: url('https://placehold.co/1600x900/343a40/ffffff?text=Modern+Web') no-repeat center center/cover;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 20px;
+        }
+        
+        .showcase::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+        }
+
+        .showcase-content {
+            z-index: 1;
+        }
+
+        .showcase h1 {
+            font-size: 4rem;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .showcase p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 1rem auto 2rem;
+        }
+
+        /* --- Content Layout --- */
+        .content-area {
+            padding: 4rem 0;
+        }
+        
+        .content-area .container {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 2.5rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+        
+        /* Card-based design */
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .card-content {
+            padding: 1.5rem 2rem;
+        }
+
+        /* Sidebar */
+        .sidebar .card-content ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar .card-content ul li a {
+            display: block;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.2s ease;
+            color: var(--text-color);
+        }
+        .sidebar .card-content ul li a:hover {
+            background-color: #e9ecef;
+            color: var(--primary-color);
+        }
+        .sidebar .card-content ul li a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        /* --- Footer --- */
+        .main-footer {
+            background: var(--dark-color);
+            color: var(--light-color);
+            padding: 3rem 0;
+            text-align: center;
+        }
+        .social-links a {
+            color: #fff;
+            margin: 0 15px;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+        .main-footer p {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* --- Media Queries --- */
+        @media (max-width: 992px) {
+            .content-area .container {
+                grid-template-columns: 1fr; /* Stack main content and sidebar */
+            }
+            .showcase h1 { font-size: 3rem; }
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .showcase h1 { font-size: 2.5rem; }
+            .showcase p { font-size: 1.1rem; }
+
+            .hamburger {
+                display: flex;
+            }
+            
+            .main-nav {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: #fff;
+                box-shadow: 0 10px 10px -10px rgba(0,0,0,0.2);
+                flex-direction: column;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            }
+            
+            .main-nav.nav-open {
+                max-height: 500px; /* Adjust as needed */
+            }
+
+            .main-nav ul {
+                flex-direction: column;
+                padding: 1rem 0;
+            }
+
+            .main-nav li {
+                margin: 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .main-nav a {
+                display: block;
+                padding: 1rem;
+            }
+
+            .main-nav a.btn {
+                margin: 1rem auto;
+                display: inline-block;
+                width: auto;
+            }
+            
+            .main-nav a::after {
+                display: none; /* Hide underline effect on mobile nav */
+            }
+            
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">Innovate</a>
+            <nav class="main-nav" id="main-nav">
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Features</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#" class="btn">Get Started</a></li>
+                </ul>
+            </nav>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Showcase Area -->
+    <section class="showcase">
+        <div class="showcase-content">
+            <h1>Crafting Digital Excellence</h1>
+            <p>We build beautiful, responsive websites that work perfectly on any device. Experience the future of web design.</p>
+            <a href="#" class="btn">Discover More</a>
+        </div>
+    </section>
+
+    <!-- Main Content Area -->
+    <div class="content-area">
+        <div class="container">
+            <!-- Main Column -->
+            <main class="main-col">
+                <h2 class="section-title">Our Latest Insights</h2>
+                <article class="card">
+                    <img src="https://placehold.co/800x450/6c757d/ffffff?text=Article+One" alt="Abstract shapes">
+                    <div class="card-content">
+                        <h3>The Art of Responsive Design</h3>
+                        <p>Learn why a mobile-first approach is crucial in today's digital landscape. We dive deep into the techniques that make websites look great everywhere.</p>
+                        <a href="#">Read More &rarr;</a>
+                    </div>
+                </article>
+                 <article class="card">
+                    <img src="https://placehold.co/800x450/007bff/ffffff?text=Article+Two" alt="Blue geometric pattern">
+                    <div class="card-content">
+                        <h3>Performance and SEO</h3>
+                        <p>A fast website is a successful website. Explore our tips for optimizing your site's speed and improving its ranking on search engines.</p>
+                        <a href="#">Read More &rarr;</a>
+                    </div>
+                </article>
+            </main>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="card">
+                    <div class="card-content">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#"><i class="fas fa-book"></i> Our Blog</a></li>
+                            <li><a href="#"><i class="fas fa-briefcase"></i> Careers</a></li>
+                            <li><a href="#"><i class="fas fa-question-circle"></i> FAQ</a></li>
+                            <li><a href="#"><i class="fas fa-envelope"></i> Contact Us</a></li>
+                        </ul>
+                    </div>
+                </div>
+                 <div class="card">
+                    <div class="card-content">
+                        <h3>About Us</h3>
+                        <p>We are a team of passionate developers and designers dedicated to creating amazing web experiences.</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>Copyright &copy; 2025 Innovate Inc. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const nav = document.getElementById('main-nav');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('nav-open');
+        });
+    </script>
+
+</body>
+</html>
